@@ -15,10 +15,26 @@ function onReady() {
     //get a reference to the form
     var ageForm = document.getElementById('age-form');
 
+    var nameField = ageForm.elements['name'];
+    if (window.localStorage) {
+        nameField.value = window.localStorage.getItem('defaultName');
+    }
     //add an event listener for the 'submit' event passing onSubmit as the event handler function
     ageForm.addEventListener('submit', onSubmit);
     //add an event listener for the 'click' event on the exit button
     //for this one we will use an inline anonymous function so that you can get used to those
+    var exitButton = document.getElementById('exit-button');
+    exitButton.addEventListener('click', function () {
+        if (window.confirm("Are you really sure you want to leave? I worked really hard on this. Don't you love me!?")) {
+            window.location = 'http://www.google.com';
+        }
+    });
+
+    nameField.addEventListener('change', function() {
+        if (window.localStorage) {
+            window.localStorage.setItem('defaultName', this.value);
+        }
+    });
 
 } //onReady()
 
